@@ -1,0 +1,5 @@
+project_id             = "TU-PROYECTO-GCP"
+zone                   = "us-central1-a"
+cluster_name           = "glitchtec-gke"
+repository_id          = "glitchtec"
+master_authorized_cidr = "TU-IP-PUBLICA/32"

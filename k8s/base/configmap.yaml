@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: parking-config
+data:
+  POSTGRES_DB: parking
+  POSTGRES_USER: parking
+  DB_HOST: postgres
+  DB_PORT: "5432"
+  APP_VERSION: v1
