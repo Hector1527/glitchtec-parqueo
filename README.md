@@ -382,6 +382,7 @@ usar migraciones SQL versionadas y respaldos, no borrar el volumen como migraci�
 | API no Ready | Logs, DB_HOST=postgres, Secret correcto, DB y esquema disponibles. No crear tablas desde múltiples réplicas. |
 | Nginx 502 | Probar DNS, Endpoints y readiness de APIs; `kubectl -n glitchtec get endpointslices`. |
 | Pod Pending | `describe pod`, recursos allocatable, taints, cuotas y disponibilidad Spot; no añadir nodos. |
+| Pods en Pending por límite de pods | `kubectl describe pod` muestra el evento "Too many pods". Con `max_pods_per_node = 16` los pods del sistema de GKE llenaban los nodos e2-small. Se desactivaron Filestore CSI, Managed Prometheus y HTTP Load Balancing; `infra/main.tf` ya usa 32 para futuras recreaciones. |
 | OOMKilled | `describe pod`, logs anteriores y métricas; reducir carga o ajustar límites dentro de capacidad. |
 | Password authentication failed | Secret y credencial persistida difieren. Reponer la contraseña original o rotar con SQL interactivo. |
 | No acceso a kubectl | Verificar cuenta/contexto/plugin y CIDR del control plane (la IP pública puede haber cambiado). |
