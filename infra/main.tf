@@ -73,6 +73,12 @@ resource "google_container_cluster" "main" {
   monitoring_service = "monitoring.googleapis.com/kubernetes"
   addons_config {
     gce_persistent_disk_csi_driver_config { enabled = true }
+    # Addons que no usamos y que ocupan cupos de pods en los nodos e2-small.
+    gcp_filestore_csi_driver_config { enabled = false }
+    http_load_balancing { disabled = true }
+  }
+  monitoring_config {
+    managed_prometheus { enabled = false }
   }
   # El pool temporal inicial también respeta e2-small spot. Se elimina antes del pool final.
   node_config {
@@ -90,7 +96,7 @@ resource "google_container_node_pool" "spot" {
   location          = var.zone
   cluster           = google_container_cluster.main.name
   node_count        = 2
-  max_pods_per_node = 16
+  max_pods_per_node = 32
   node_config {
     machine_type    = "e2-small"
     spot            = true
